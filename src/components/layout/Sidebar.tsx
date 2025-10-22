@@ -1,6 +1,18 @@
-import { Home, Grid, BarChart3, Trophy, BookOpen, FileText, Map, Book, ClipboardList, Gamepad2 } from "lucide-react";
+import { Home, Grid, BarChart3, Trophy, BookOpen, FileText, Map, Book, ClipboardList, Gamepad2, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import {
+  Sidebar as SidebarUI,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarTrigger,
+  useSidebar,
+} from "@/components/ui/sidebar";
 
 const studentNavItems = [
   { icon: Home, label: "Home", path: "/dashboard" },
@@ -19,70 +31,113 @@ const learnNavItems = [
 ];
 
 export function Sidebar() {
+  const { open } = useSidebar();
+
   return (
-    <aside className="w-64 h-screen bg-sidebar border-r border-sidebar-border flex flex-col">
-      <div className="p-6">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+    <SidebarUI collapsible="icon">
+      <div className="p-4 border-b border-sidebar-border flex items-center justify-between">
+        {open && (
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-lg">E</span>
+            </div>
+            <span className="font-bold text-lg">EduPlatform</span>
+          </div>
+        )}
+        {!open && (
+          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mx-auto">
             <span className="text-primary-foreground font-bold text-lg">E</span>
           </div>
-          <span className="font-bold text-lg">EduPlatform</span>
-        </div>
+        )}
+        <SidebarTrigger className={cn(!open && "mx-auto mt-2")} />
       </div>
 
-      <nav className="flex-1 px-3 space-y-1">
-        {studentNavItems.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                isActive
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                  : "text-sidebar-foreground hover:bg-sidebar-accent/50"
-              )
-            }
-          >
-            <item.icon className="w-5 h-5" />
-            <span>{item.label}</span>
-            {item.badge && (
-              <span className="ml-auto px-2 py-0.5 bg-accent text-accent-foreground text-xs rounded-md">
-                {item.badge}
-              </span>
-            )}
-          </NavLink>
-        ))}
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Student</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {studentNavItems.map((item) => (
+                <SidebarMenuItem key={item.path}>
+                  <SidebarMenuButton asChild>
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) =>
+                        cn(
+                          "flex items-center gap-3",
+                          isActive && "bg-sidebar-accent text-sidebar-accent-foreground"
+                        )
+                      }
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span>{item.label}</span>
+                      {item.badge && open && (
+                        <span className="ml-auto px-2 py-0.5 bg-accent text-accent-foreground text-xs rounded-md">
+                          {item.badge}
+                        </span>
+                      )}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
 
-        <div className="pt-6 pb-2">
-          <span className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            Learn
-          </span>
-        </div>
+        <SidebarGroup>
+          <SidebarGroupLabel>Learn</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {learnNavItems.map((item) => (
+                <SidebarMenuItem key={item.path}>
+                  <SidebarMenuButton asChild>
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) =>
+                        cn(
+                          "flex items-center gap-3",
+                          isActive && "bg-sidebar-accent text-sidebar-accent-foreground"
+                        )
+                      }
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span>{item.label}</span>
+                      {item.badge && open && (
+                        <span className="ml-auto px-2 py-0.5 bg-accent text-accent-foreground text-xs rounded-md">
+                          {item.badge}
+                        </span>
+                      )}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
 
-        {learnNavItems.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                isActive
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                  : "text-sidebar-foreground hover:bg-sidebar-accent/50"
-              )
-            }
-          >
-            <item.icon className="w-5 h-5" />
-            <span>{item.label}</span>
-            {item.badge && (
-              <span className="ml-auto px-2 py-0.5 bg-accent text-accent-foreground text-xs rounded-md">
-                {item.badge}
-              </span>
-            )}
-          </NavLink>
-        ))}
-      </nav>
-    </aside>
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink
+                    to="/profile"
+                    className={({ isActive }) =>
+                      cn(
+                        "flex items-center gap-3",
+                        isActive && "bg-sidebar-accent text-sidebar-accent-foreground"
+                      )
+                    }
+                  >
+                    <User className="w-5 h-5" />
+                    <span>Profile</span>
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </SidebarUI>
   );
 }

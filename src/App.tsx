@@ -9,6 +9,15 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
+import Showcase from "./pages/Showcase";
+import SkillGraph from "./pages/SkillGraph";
+import Leaderboards from "./pages/Leaderboards";
+import DesignBriefs from "./pages/DesignBriefs";
+import CareerPaths from "./pages/CareerPaths";
+import Lessons from "./pages/Lessons";
+import Assessments from "./pages/Assessments";
+import Arcade from "./pages/Arcade";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,14 +36,15 @@ const App = () => (
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/courses" element={<Courses />} />
-            <Route path="/showcase" element={<Dashboard />} />
-            <Route path="/skill-graph" element={<Dashboard />} />
-            <Route path="/leaderboards" element={<Dashboard />} />
-            <Route path="/design-briefs" element={<Dashboard />} />
-            <Route path="/career-paths" element={<Dashboard />} />
-            <Route path="/lessons" element={<Dashboard />} />
-            <Route path="/assessments" element={<Dashboard />} />
-            <Route path="/arcade" element={<Dashboard />} />
+            <Route path="/showcase" element={<Showcase />} />
+            <Route path="/skill-graph" element={<SkillGraph />} />
+            <Route path="/leaderboards" element={<Leaderboards />} />
+            <Route path="/design-briefs" element={<DesignBriefs />} />
+            <Route path="/career-paths" element={<CareerPaths />} />
+            <Route path="/lessons" element={<Lessons />} />
+            <Route path="/assessments" element={<Assessments />} />
+            <Route path="/arcade" element={<Arcade />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
