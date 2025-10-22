@@ -5,8 +5,8 @@ import { BookOpen, Target, Trophy, Clock } from "lucide-react";
 
 export default function Dashboard() {
   return (
-    <div className="p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="p-8 bg-muted/30 min-h-screen">
+      <div className="max-w-7xl mx-auto bg-background rounded-3xl p-8 shadow-sm">
         <h1 className="text-4xl font-bold mb-2">Welcome back, Student! 👋</h1>
         <p className="text-muted-foreground mb-8">
           Here's what's happening with your learning today

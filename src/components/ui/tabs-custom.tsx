@@ -14,7 +14,7 @@ interface TabsCustomProps {
 
 export function TabsCustom({ tabs, activeTab, onChange, className }: TabsCustomProps) {
   return (
-    <div className={cn("flex gap-2", className)}>
+    <div className={cn("flex gap-3 flex-wrap", className)}>
       {tabs.map((tab) => (
         <button
           key={tab.value}
@@ -22,8 +22,8 @@ export function TabsCustom({ tabs, activeTab, onChange, className }: TabsCustomP
           className={cn(
             "px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
             activeTab === tab.value
-              ? "bg-secondary text-foreground border-2 border-primary/20"
-              : "bg-transparent text-muted-foreground hover:bg-secondary/50 border-2 border-transparent"
+              ? "bg-muted text-foreground"
+              : "bg-transparent text-muted-foreground hover:bg-muted/50"
           )}
         >
           {tab.label}
